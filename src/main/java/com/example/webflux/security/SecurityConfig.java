@@ -37,7 +37,6 @@ public class SecurityConfig implements SecurityWebFilterChain {
                 .pathMatchers("/admin/**").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.GET, "/mustSignInContents").hasAnyRole("USER")
                 .pathMatchers(HttpMethod.GET, "/**").permitAll()
-                .pathMatchers(HttpMethod.POST, "/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)

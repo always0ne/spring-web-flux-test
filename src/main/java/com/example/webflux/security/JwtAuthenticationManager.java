@@ -9,14 +9,14 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
-  private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-  @Override
-  public Mono<Authentication> authenticate(Authentication authentication) {
-    return Mono.just(authentication)
-        .flatMap(jwtTokenProvider::resolveToken)
-        //.onErrorResume(Mono.empty())
-        .flatMap(jwtTokenProvider::getAuthentication);
-  }
+    @Override
+    public Mono<Authentication> authenticate(Authentication authentication) {
+        return Mono.just(authentication)
+                .flatMap(jwtTokenProvider::resolveToken)
+                .onErrorStop()
+                .flatMap(jwtTokenProvider::getAuthentication);
+    }
 }
 

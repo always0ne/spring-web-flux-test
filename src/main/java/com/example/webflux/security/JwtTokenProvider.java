@@ -165,7 +165,7 @@ public class JwtTokenProvider {
         return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
-    public static Mono<String> getUserIdFromAuth(){
+    public static Mono<String> getUserIdFromAuth() {
         return ReactiveSecurityContextHolder.getContext()
                 .map(securityContext -> securityContext.getAuthentication().getName());
     }
